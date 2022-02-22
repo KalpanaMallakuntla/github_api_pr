@@ -1,13 +1,8 @@
 #!/usr/bin/bash
-#if [ $(curl -H "Accept: application/json" https://api.github.com/repos/KalpanaMallakuntla/$repo/pulls/ | jq -r '.[] | [.created_at] | @csv' | sed 's/"//g' | cut -dT -f1 | sed 's/-//g')
-#curl -H "Accept: application/json" https://api.github.com/repos/KalpanaMallakuntla/$repo/pulls | jq -r '.[] | [.created_at] | @csv' > /tmp/test.txt
-#cat test.txt | sed 's/"//g' | cut -dT -f1 | sed 's/-//g' > /tmp/created_at.txt
-
-
-curl -H "Accept: application/json" https://api.github.com/repos/KalpanaMallakuntla/github_api_pr/pulls | jq -r '.[] | [.id, .state, .draft, .label, .created_at] | @csv' > pullrequests.txt
-
-curl -H "Accept: application/json" https://api.github.com/repos/KalpanaMallakuntla/github_api_pr/pulls?state=closed | jq -r '.[] | [.id, .state, .draft, .label, .created_at] | @csv' >> pullrequests.txt
-
+echo -n "enter repo name: "
+read repo
+curl -H "Accept: application/json" https://api.github.com/repos/KalpanaMallakuntla/$repo/pulls | jq -r '.[] | [.id, .state, .draft, .label, .created_at] | @csv' > pullrequests.txt
+curl -H "Accept: application/json" https://api.github.com/repos/KalpanaMallakuntla/$repo/pulls?state=closed | jq -r '.[] | [.id, .state, .draft, .label, .created_at] | @csv' >> pullrequests.txt
 cat pullrequests.txt | sed 's/"//g' | cut -dT -f1 | sed 's/-//g' | sed 's/,/ /g' > /tmp/explore.txt
   #    exit 0
 # else
