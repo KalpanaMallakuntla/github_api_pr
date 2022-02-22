@@ -1,6 +1,6 @@
 pullrequests.sh: this is the shell script to get the public repo pull requests details which includes "id","state","draft", "created_at" of respective to them.
 mail.sh : The script will print the output to console in amil format.
-Variables: the project name and repo and date can be provided dynamically during the run time
+Variables: the project name and repo and date can be provided dynamically during the run time.
 project
 repo
 enddate
